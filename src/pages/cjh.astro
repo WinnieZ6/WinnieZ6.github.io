@@ -37,13 +37,9 @@ const images = [
 
 <MainLayout title="CJH - The Legend of Changshu">
   <!-- Hero Section with Parallax -->
-  <div class="relative h-screen overflow-hidden bg-white">
-    <div class="absolute inset-0 bg-gradient-to-br from-black via-black/90 to-black"></div>
-    <!-- Animated background overlay -->
-    <div class="absolute inset-100 opacity-0">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(76,29,100,0.3),rgba(12,29,199,0))]"></div>
-    </div>
-    <div class="relative max-w-6xl mx-auto px-4 pt-32 text-white text-center">
+  <div class="relative h-screen overflow-hidden bg-black">
+    <div class="absolute inset-0 bg-gradient-to-br from-black via-purple-900/30 to-black"></div>
+    <div class="relative max-w-6xl mx-auto px-4 pt-48 text-white text-center">
       <h1 class="text-8xl font-bold mb-4 animate-fade-in bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
         {personalInfo.name}
       </h1>
@@ -53,17 +49,33 @@ const images = [
       <div class="text-2xl text-pink-400/80 mb-8 animate-slide-up-delay">
         {personalInfo.subtitle}
       </div>
+      
+      <!-- Added Text Section, now positioned lower -->
+      <div class="absolute inset-x-0 bottom-10 mb-20 text-center">
+        <div class="text-5xl font-bold text-red-600 transform rotate-12 animate-float">
+          常熟理工
+        </div>
+        <div class="text-4xl font-bold text-yellow-500 transform rotate-6 animate-float">
+          世界上最好的大學
+        </div>
+        <div class="text-3xl font-bold text-blue-400 transform rotate-3 animate-float">
+          趕緊給我入學
+        </div>
+        <div class="text-2xl font-bold text-green-300 transform rotate-0 animate-float">
+          -來自我的手機呢 褚嘉豪
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Achievements Grid -->
-  <div class="py-20 bg-[#0a0a0a]">
+  <div class="py-20 bg-black">
     <div class="max-w-6xl mx-auto px-4">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {personalInfo.achievements.map(achievement => (
-          <div class="bg-gradient-to-br from-purple-900/40 to-pink-900/40 p-6 rounded-xl text-white text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 border border-purple-500/20 backdrop-blur-sm">
+          <a href="https://www.cslg.edu.cn/" target="_blank" class="bg-gradient-to-br from-purple-900/40 to-pink-900/40 p-6 rounded-xl text-white text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 border border-purple-500/20">
             <p class="font-bold glow-text-sm">{achievement}</p>
-          </div>
+          </a>
         ))}
       </div>
     </div>
@@ -91,7 +103,7 @@ const images = [
     <div class="max-w-6xl mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {images.map((image, index) => (
-          <div class="group relative overflow-hidden rounded-xl border border-purple-500/20">
+          <a href="https://www.cslg.edu.cn/" target="_blank" class="group relative overflow-hidden rounded-xl border border-purple-500/20">
             <img 
               src={image.url} 
               alt={image.caption}
@@ -102,7 +114,7 @@ const images = [
                 <p class="text-white font-bold text-xl glow-text-sm">{image.caption}</p>
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
@@ -161,5 +173,15 @@ const images = [
   /* Enhanced image hover effect */
   .group:hover img {
     filter: brightness(0.8) contrast(1.2);
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
   }
 </style> 

@@ -1,0 +1,71 @@
+import MainLayout from '../layouts/MainLayout.astro';
+
+const honors = [
+  "Honor 1",
+  "Honor 2",
+  "Honor 3"
+];
+
+const experiences = [
+  { title: "Experience 1", description: "Description of experience 1" },
+  { title: "Experience 2", description: "Description of experience 2" },
+  { title: "Experience 3", description: "Description of experience 3" }
+];
+
+const projects = [
+  { title: "Project 1", image: "https://i.imgur.com/Dyiwikc.png" },
+  { title: "Project 2", image: "https://i.imgur.com/Oy8UI0e.png" },
+  { title: "Project 3", image: "https://i.imgur.com/d1HRp0V.png" }
+];
+
+<MainLayout title="About Me">
+  <div class="max-w-6xl mx-auto px-4 py-20">
+    <h1 class="text-5xl font-bold mb-8">About Me</h1>
+
+    <!-- Honors Section -->
+    <div class="mb-12">
+      <h2 class="text-3xl font-semibold mb-4">Honors</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {honors.map(honor => (
+          <a href="https://gubei.suis.com.cn/" target="_blank" class="bg-gradient-to-br from-purple-900/40 to-pink-900/40 p-6 rounded-xl text-white text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 border border-purple-500/20">
+            <p class="font-bold">{honor}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Experiences Section -->
+    <div class="mb-12">
+      <h2 class="text-3xl font-semibold mb-4">Experiences</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {experiences.map(exp => (
+          <a href="https://gubei.suis.com.cn/" target="_blank" class="bg-gradient-to-br from-purple-900/40 to-pink-900/40 p-6 rounded-xl text-white text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 border border-purple-500/20">
+            <h3 class="font-bold">{exp.title}</h3>
+            <p>{exp.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div class="mb-12">
+      <h2 class="text-3xl font-semibold mb-4">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {projects.map(project => (
+          <a href="https://gubei.suis.com.cn/" target="_blank" class="group relative overflow-hidden rounded-xl border border-purple-500/20">
+            <img 
+              src={project.image} 
+              alt={project.title}
+              class="w-full h-96 object-cover transform group-hover:scale-110 transition-all duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <p class="text-white font-bold text-xl">{project.title}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</MainLayout> 
