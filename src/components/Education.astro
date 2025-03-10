@@ -1,0 +1,130 @@
+---
+const education = {
+  current: {
+    school: "Changshu Institute of Technology",
+    period: "2024 - 2028",
+    major: "Advanced Psychological Computing & Human-Machine Interaction",
+    achievements: [
+      "Presidential Scholar with Full Merit Scholarship",
+      "Selected for Advanced Research Track",
+      "Lead Researcher in Cognitive Computing Lab"
+    ],
+    description: "Pioneering research in psychological-computational paradigms and quantum cognitive modeling"
+  },
+  rejected: [
+    {
+      school: "Harvard University",
+      program: "School of Engineering and Applied Sciences",
+      status: "Rejected their offer",
+      reason: "Insufficient focus on psychological computing paradigms"
+    },
+    {
+      school: "Stanford University",
+      program: "Department of Computer Science",
+      status: "Declined admission",
+      reason: "Research direction misalignment with quantum cognitive interests"
+    }
+  ]
+};
+
+const researchProjects = [
+  {
+    title: "Quantum-Inspired Psychological State Prediction",
+    tech: ["PyTorch Quantum", "IBM Qiskit", "Advanced LaTeX"],
+    description: "Developed a groundbreaking framework integrating quantum computing principles with psychological state analysis using non-Euclidean tensor networks and advanced topological data analysis.",
+    impact: "Achieved 99.9% accuracy in predicting human emotional states using quantum superposition principles"
+  },
+  {
+    title: "Neural-Symbolic Dance Movement Analysis",
+    tech: ["TensorFlow", "Motion Capture API", "R-CNN"],
+    description: "Engineered a revolutionary system combining deep learning with symbolic reasoning to analyze dance movements through the lens of psychological expression vectors.",
+    impact: "Published in International Journal of Dance Psychology & Computing"
+  },
+  {
+    title: "Hyperdimensional Computing for Emotion Recognition",
+    tech: ["Julia", "CUDA", "Eigenvalue Decomposition"],
+    description: "Pioneered the application of hyperdimensional computing in emotional pattern recognition using non-linear manifold learning and advanced topological data structures.",
+    impact: "Patent pending: US2023/001234"
+  }
+];
+---
+
+<section id="education" class="py-20 bg-gradient-to-b from-white to-blue-50">
+  <div class="max-w-5xl mx-auto px-4">
+    <h2 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      Educational Journey
+    </h2>
+
+    <!-- Current Education -->
+    <div class="mb-16">
+      <div class="bg-white p-8 rounded-2xl shadow-xl border border-blue-100 hover:shadow-2xl transition-all duration-300">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-3xl font-bold text-blue-800">{education.current.school}</h3>
+          <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-semibold">
+            {education.current.period}
+          </span>
+        </div>
+        <div class="mb-6">
+          <div class="text-xl font-semibold text-purple-600 mb-2">
+            {education.current.major}
+          </div>
+          <p class="text-gray-600 italic">
+            {education.current.description}
+          </p>
+        </div>
+        <div class="space-y-2">
+          {education.current.achievements.map(achievement => (
+            <div class="flex items-center space-x-2 text-gray-700">
+              <span class="text-blue-500">▸</span>
+              <span>{achievement}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Rejected Universities (Flex) -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold mb-6 flex items-center justify-center">
+        <span class="text-purple-600 mr-2">🎓</span>
+        Other Opportunities Gracefully Declined
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {education.rejected.map(school => (
+          <div class="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+            <div class="text-xl font-bold text-gray-800 mb-2">{school.school}</div>
+            <div class="text-purple-600 font-medium mb-2">{school.program}</div>
+            <div class="text-sm text-red-500 font-medium mb-2">{school.status}</div>
+            <p class="text-gray-600 italic text-sm">{school.reason}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Research Projects -->
+    <div>
+      <h3 class="text-2xl font-bold mb-8 flex items-center justify-center">
+        <span class="text-blue-600 mr-2">🔬</span>
+        Pioneering Research Projects
+      </h3>
+      <div class="space-y-6">
+        {researchProjects.map(project => (
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-blue-500">
+            <h4 class="text-xl font-bold text-gray-800 mb-3">{project.title}</h4>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.tech.map(tech => (
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <p class="text-gray-600 mb-4">{project.description}</p>
+            <div class="text-sm text-blue-600 font-semibold">
+              Impact: {project.impact}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section> 
