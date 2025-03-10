@@ -35,6 +35,47 @@ import Layout from '../layouts/Layout.astro';
   <main class="space-y-20 mb-20">
     <div class="max-w-6xl mx-auto px-4 pt-20">
       <h1 class="text-4xl font-bold text-center">Welcome to My Website</h1>
+      
+      <!-- CJH Button -->
+      <div class="flex justify-center mt-8">
+        <a 
+          href="/cjh" 
+          class="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-bold text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+        >
+          <span class="relative z-10">🏋️‍♂️ Meet CJH - The Legend of Changshu 💪</span>
+          <div class="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </a>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 mt-12 overflow-hidden">
+      <div class="gallery-scroll">
+        <div class="gallery-content">
+          <img src="https://i.imgur.com/inWtp1M.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/Zt74Koe.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/LZwsBev.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/4vJ8cwV.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/R9JouXK.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/YR72OW8.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/qYNz3CH.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/qiKBzWq.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/EaB5HNn.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/RmrQ1ZC.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/tuMqJ5R.png" alt="Winnie" class="h-64 w-auto" />
+        </div>
+        <div class="gallery-content" aria-hidden="true">
+          <img src="https://i.imgur.com/inWtp1M.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/Zt74Koe.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/LZwsBev.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/4vJ8cwV.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/R9JouXK.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/YR72OW8.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/qYNz3CH.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/qiKBzWq.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/EaB5HNn.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/RmrQ1ZC.png" alt="Winnie" class="h-64 w-auto" />
+          <img src="https://i.imgur.com/tuMqJ5R.png" alt="Winnie" class="h-64 w-auto" />
+        </div>
+      </div>
     </div>
     <About />
     <Education />
@@ -47,7 +88,7 @@ import Layout from '../layouts/Layout.astro';
     <img 
       src="https://i.imgur.com/qiKBzWq.png" 
       alt="Custom cursor" 
-      class="w-16 h-16"
+      class="w-12 h-12"
     />
   </div>
 </MainLayout>
@@ -123,6 +164,83 @@ import Layout from '../layouts/Layout.astro';
       opacity: 0;
     }
   }
+
+  .gallery-scroll {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    animation: scroll 30s linear infinite;
+    display: flex;
+  }
+  
+  /* Container for repeated images */
+  .gallery-content {
+    display: flex;
+    gap: 1rem;
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%); /* Only move half way since we duplicate */
+    }
+  }
+
+  /* Pause animation on hover */
+  .gallery-scroll:hover {
+    animation-play-state: paused;
+  }
+
+  .gallery-scroll img {
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-scroll img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Update cursor styles for better positioning with smaller size */
+  #custom-cursor img {
+    position: absolute;
+    transition: all 0.5s ease;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    width: 48px;  /* Explicit size */
+    height: 48px;
+  }
+
+  @keyframes spinOut {
+    0% {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(360deg) scale(0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes spinIn {
+    0% {
+      transform: rotate(-360deg) scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .cursor-spin-out {
+    animation: spinOut 0.5s forwards;
+  }
+
+  .cursor-spin-in {
+    animation: spinIn 0.5s forwards;
+  }
 </style>
 
 <script>
@@ -140,97 +258,170 @@ import Layout from '../layouts/Layout.astro';
     'https://i.imgur.com/qiKBzWq.png',
     'https://i.imgur.com/EaB5HNn.png',
     'https://i.imgur.com/RmrQ1ZC.png',
-    'https://i.imgur.com/tuMqJ5R.png'
+    'https://i.imgur.com/tuMqJ5R.png',
+    'https://i.imgur.com/inWtp1M.png',
+    'https://i.imgur.com/Zt74Koe.png',
+    'https://i.imgur.com/LZwsBev.png',
+    'https://i.imgur.com/4vJ8cwV.png',
+    'https://i.imgur.com/R9JouXK.png',
+    'https://i.imgur.com/YR72OW8.png',
+    'https://i.imgur.com/qYNz3CH.png'
   ];
 
   const playground = document.querySelector('.winnie-playground');
   const button = document.getElementById('winnieButton');
   let isAnimating = false;
 
-  function createWinnieExplosion(x, y) {
-    if (!playground || isAnimating) return;
-    isAnimating = true;
-
-    const numWinnies = 40;  // More Winnies!
-    const explosionRadius = Math.min(window.innerWidth, window.innerHeight) * 0.6; // Bigger radius
-
-    for (let i = 0; i < numWinnies; i++) {
+  function createSideExplosions() {
+    // Left side explosion
+    for (let i = 0; i < 30; i++) {
       const winnie = document.createElement('img');
       winnie.src = winnieImages[Math.floor(Math.random() * winnieImages.length)];
       winnie.className = 'winnie';
       
-      // Larger size between 60 and 120 pixels
       const size = 60 + Math.random() * 60;
       winnie.style.width = `${size}px`;
       winnie.style.height = `${size}px`;
-
-      // Position at click point
-      winnie.style.left = `${x}px`;
-      winnie.style.top = `${y}px`;
-
-      // Calculate random end position with more variation
-      const angle = (i / numWinnies) * 2 * Math.PI + (Math.random() * 0.5 - 0.25);
-      const distance = explosionRadius * (0.4 + Math.random() * 0.6);
-      const tx = Math.cos(angle) * distance;
-      const ty = Math.sin(angle) * distance;
-      const rotation = Math.random() * 1080 - 540; // More rotation
-
-      // Set animation properties
+      
+      // Start from left side
+      winnie.style.left = '-100px';
+      winnie.style.top = `${Math.random() * window.innerHeight}px`;
+      
+      const tx = window.innerWidth * (0.3 + Math.random() * 0.4);
+      const ty = (Math.random() - 0.5) * 300;
+      const rotation = Math.random() * 1080 - 540;
+      
       winnie.style.setProperty('--tx', `${tx}px`);
       winnie.style.setProperty('--ty', `${ty}px`);
       winnie.style.setProperty('--r', `${rotation}deg`);
       
-      // Longer duration between 2-3 seconds
       const duration = 2 + Math.random();
       winnie.style.animation = `explode ${duration}s forwards`;
-
-      playground.appendChild(winnie);
-
-      // Clean up after animation
-      winnie.addEventListener('animationend', () => {
-        winnie.remove();
-      });
+      
+      playground?.appendChild(winnie);
+      winnie.addEventListener('animationend', () => winnie.remove());
     }
 
-    // Create a second wave after a short delay
+    // Right side explosion
+    for (let i = 0; i < 30; i++) {
+      const winnie = document.createElement('img');
+      winnie.src = winnieImages[Math.floor(Math.random() * winnieImages.length)];
+      winnie.className = 'winnie';
+      
+      const size = 60 + Math.random() * 60;
+      winnie.style.width = `${size}px`;
+      winnie.style.height = `${size}px`;
+      
+      // Start from right side
+      winnie.style.left = `${window.innerWidth + 100}px`;
+      winnie.style.top = `${Math.random() * window.innerHeight}px`;
+      
+      const tx = -window.innerWidth * (0.3 + Math.random() * 0.4);
+      const ty = (Math.random() - 0.5) * 300;
+      const rotation = Math.random() * 1080 - 540;
+      
+      winnie.style.setProperty('--tx', `${tx}px`);
+      winnie.style.setProperty('--ty', `${ty}px`);
+      winnie.style.setProperty('--r', `${rotation}deg`);
+      
+      const duration = 2 + Math.random();
+      winnie.style.animation = `explode ${duration}s forwards`;
+      
+      playground?.appendChild(winnie);
+      winnie.addEventListener('animationend', () => winnie.remove());
+    }
+  }
+
+  function createWinnieExplosion(x, y) {
+    if (!playground || isAnimating) return;
+    isAnimating = true;
+
+    // Create side explosions first
+    createSideExplosions();
+
+    // Then create center explosion
     setTimeout(() => {
-      for (let i = 0; i < 20; i++) {
+      const numWinnies = 40;  // More Winnies!
+      const explosionRadius = Math.min(window.innerWidth, window.innerHeight) * 0.6; // Bigger radius
+
+      for (let i = 0; i < numWinnies; i++) {
         const winnie = document.createElement('img');
         winnie.src = winnieImages[Math.floor(Math.random() * winnieImages.length)];
         winnie.className = 'winnie';
         
-        const size = 40 + Math.random() * 40;
+        // Larger size between 60 and 120 pixels
+        const size = 60 + Math.random() * 60;
         winnie.style.width = `${size}px`;
         winnie.style.height = `${size}px`;
-        
+
+        // Position at click point
         winnie.style.left = `${x}px`;
         winnie.style.top = `${y}px`;
-        
-        const angle = Math.random() * Math.PI * 2;
-        const distance = explosionRadius * 0.7 * Math.random();
+
+        // Calculate random end position with more variation
+        const angle = (i / numWinnies) * 2 * Math.PI + (Math.random() * 0.5 - 0.25);
+        const distance = explosionRadius * (0.4 + Math.random() * 0.6);
         const tx = Math.cos(angle) * distance;
         const ty = Math.sin(angle) * distance;
-        const rotation = Math.random() * 720 - 360;
-        
+        const rotation = Math.random() * 1080 - 540; // More rotation
+
+        // Set animation properties
         winnie.style.setProperty('--tx', `${tx}px`);
         winnie.style.setProperty('--ty', `${ty}px`);
         winnie.style.setProperty('--r', `${rotation}deg`);
         
-        const duration = 2.5 + Math.random();
+        // Longer duration between 2-3 seconds
+        const duration = 2 + Math.random();
         winnie.style.animation = `explode ${duration}s forwards`;
-        
+
         playground.appendChild(winnie);
-        
+
+        // Clean up after animation
         winnie.addEventListener('animationend', () => {
           winnie.remove();
         });
       }
+
+      // Create a second wave after a short delay
+      setTimeout(() => {
+        for (let i = 0; i < 20; i++) {
+          const winnie = document.createElement('img');
+          winnie.src = winnieImages[Math.floor(Math.random() * winnieImages.length)];
+          winnie.className = 'winnie';
+          
+          const size = 40 + Math.random() * 40;
+          winnie.style.width = `${size}px`;
+          winnie.style.height = `${size}px`;
+          
+          winnie.style.left = `${x}px`;
+          winnie.style.top = `${y}px`;
+          
+          const angle = Math.random() * Math.PI * 2;
+          const distance = explosionRadius * 0.7 * Math.random();
+          const tx = Math.cos(angle) * distance;
+          const ty = Math.sin(angle) * distance;
+          const rotation = Math.random() * 720 - 360;
+          
+          winnie.style.setProperty('--tx', `${tx}px`);
+          winnie.style.setProperty('--ty', `${ty}px`);
+          winnie.style.setProperty('--r', `${rotation}deg`);
+          
+          const duration = 2.5 + Math.random();
+          winnie.style.animation = `explode ${duration}s forwards`;
+          
+          playground.appendChild(winnie);
+          
+          winnie.addEventListener('animationend', () => {
+            winnie.remove();
+          });
+        }
+      }, 200);
     }, 200);
 
-    // Allow new explosions after all animations complete
+    // Increase cooldown for longer effect
     setTimeout(() => {
       isAnimating = false;
-    }, 3000);  // Longer cooldown
+    }, 4000);
   }
 
   // Create explosion from button click
@@ -248,4 +439,31 @@ import Layout from '../layouts/Layout.astro';
       createWinnieExplosion(e.clientX, e.clientY);
     }
   });
+
+  // Updated cursor rotation
+  let currentCursorImageIndex = 0;
+
+  function rotateCursorImage() {
+    if (!cursor) return;
+    
+    const currentImg = cursor.querySelector('img');
+    const newImg = document.createElement('img');
+    
+    // Get next image
+    currentCursorImageIndex = (currentCursorImageIndex + 1) % winnieImages.length;
+    newImg.src = winnieImages[currentCursorImageIndex];
+    newImg.className = 'w-12 h-12 cursor-spin-in';  // Changed from w-16 h-16
+    
+    // Spin out current image
+    if (currentImg) {
+      currentImg.classList.add('cursor-spin-out');
+      setTimeout(() => currentImg.remove(), 500);
+    }
+    
+    // Add new spinning image
+    cursor.appendChild(newImg);
+  }
+
+  // Change cursor image every 3 seconds
+  setInterval(rotateCursorImage, 3000);
 </script> 

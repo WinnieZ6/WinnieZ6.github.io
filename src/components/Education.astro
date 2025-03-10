@@ -1,6 +1,6 @@
 ---
-const education = {
-  current: {
+const education = [
+  {
     school: "Changshu Institute of Technology",
     period: "2024 - 2028",
     major: "Advanced Psychological Computing & Human-Machine Interaction",
@@ -9,23 +9,25 @@ const education = {
       "Selected for Advanced Research Track",
       "Lead Researcher in Cognitive Computing Lab"
     ],
-    description: "Pioneering research in psychological-computational paradigms and quantum cognitive modeling"
+    description: "Pioneering research in psychological-computational paradigms and quantum cognitive modeling",
+    scores: [
+      { name: "SAT", score: "141414214" },
+      { name: "GaoKao Chinese", score: "666" }
+    ]
   },
-  rejected: [
-    {
-      school: "Harvard University",
-      program: "School of Engineering and Applied Sciences",
-      status: "Rejected their offer",
-      reason: "Insufficient focus on psychological computing paradigms"
-    },
-    {
-      school: "Stanford University",
-      program: "Department of Computer Science",
-      status: "Declined admission",
-      reason: "Research direction misalignment with quantum cognitive interests"
-    }
-  ]
-};
+  {
+    school: "Harvard University",
+    program: "School of Engineering and Applied Sciences",
+    status: "Rejected their offer",
+    reason: "Insufficient focus on psychological computing paradigms"
+  },
+  {
+    school: "Stanford University",
+    program: "Department of Computer Science",
+    status: "Declined admission",
+    reason: "Research direction misalignment with quantum cognitive interests"
+  }
+];
 
 const researchProjects = [
   {
@@ -50,30 +52,43 @@ const researchProjects = [
 ---
 
 <section id="education" class="py-20 bg-gradient-to-b from-white to-blue-50">
-  <div class="max-w-5xl mx-auto px-4">
-    <h2 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-      Educational Journey
-    </h2>
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8">Education</h2>
 
     <!-- Current Education -->
     <div class="mb-16">
       <div class="bg-white p-8 rounded-2xl shadow-xl border border-blue-100 hover:shadow-2xl transition-all duration-300">
         <div class="flex items-center justify-between mb-6">
-          <h3 class="text-3xl font-bold text-blue-800">{education.current.school}</h3>
+          <h3 class="text-3xl font-bold text-blue-800">{education[0].school}</h3>
           <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-semibold">
-            {education.current.period}
+            {education[0].period}
           </span>
         </div>
+        
+        <!-- Test Scores Box -->
+        <div class="mb-6 bg-gradient-to-r from-pink-50 to-purple-50 p-4 rounded-xl border border-pink-100">
+          <h4 class="text-lg font-semibold text-pink-800 mb-3">Test Scores 🎯</h4>
+          <div class="grid grid-cols-2 gap-4">
+            {education[0].scores.map(score => (
+              <div class="bg-white p-3 rounded-lg shadow-sm">
+                <div class="text-purple-700 font-medium">{score.name}</div>
+                <div class="text-2xl font-bold text-pink-600">{score.score}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div class="mb-6">
           <div class="text-xl font-semibold text-purple-600 mb-2">
-            {education.current.major}
+            {education[0].major}
           </div>
           <p class="text-gray-600 italic">
-            {education.current.description}
+            {education[0].description}
           </p>
         </div>
+        
         <div class="space-y-2">
-          {education.current.achievements.map(achievement => (
+          {education[0].achievements.map(achievement => (
             <div class="flex items-center space-x-2 text-gray-700">
               <span class="text-blue-500">▸</span>
               <span>{achievement}</span>
@@ -90,7 +105,7 @@ const researchProjects = [
         Other Opportunities Gracefully Declined
       </h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {education.rejected.map(school => (
+        {education.slice(1).map(school => (
           <div class="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
             <div class="text-xl font-bold text-gray-800 mb-2">{school.school}</div>
             <div class="text-purple-600 font-medium mb-2">{school.program}</div>

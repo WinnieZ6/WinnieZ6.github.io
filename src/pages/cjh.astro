@@ -1,0 +1,165 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+const personalInfo = {
+  name: "CJH (JACK)",
+  title: "The Legendary Leader of Changshu",
+  subtitle: "Owner of Elephant Training House | Elite Bodybuilder",
+  achievements: [
+    "Changshu's Premier Bodybuilding Champion",
+    "Founder of Elephant Training House",
+    "Fitness Icon of Jiangsu Province",
+    "Mentor to Countless Athletes"
+  ]
+};
+
+const education = [
+  {
+    school: "University of Texas at Austin",
+    degree: "Computer Science",
+    period: "2023-Present",
+    highlight: "🌟 #1 Public University in Texas"
+  },
+  {
+    school: "Changshu Institute of Technology",
+    degree: "Computer Science",
+    period: "2021-2023",
+    highlight: "Elite Scholar"
+  }
+];
+
+const images = [
+  { url: "https://i.imgur.com/Dyiwikc.png", caption: "The Legend Himself" },
+  { url: "https://i.imgur.com/Oy8UI0e.png", caption: "Peak Performance" },
+  { url: "https://i.imgur.com/d1HRp0V.png", caption: "Unstoppable Force" }
+];
+---
+
+<MainLayout title="CJH - The Legend of Changshu">
+  <!-- Hero Section with Parallax -->
+  <div class="relative h-screen overflow-hidden bg-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-black via-black/90 to-black"></div>
+    <!-- Animated background overlay -->
+    <div class="absolute inset-100 opacity-0">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(76,29,100,0.3),rgba(12,29,199,0))]"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-4 pt-32 text-white text-center">
+      <h1 class="text-8xl font-bold mb-4 animate-fade-in bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
+        {personalInfo.name}
+      </h1>
+      <div class="text-4xl font-bold mb-2 text-purple-300 animate-slide-up glow-text">
+        {personalInfo.title}
+      </div>
+      <div class="text-2xl text-pink-400/80 mb-8 animate-slide-up-delay">
+        {personalInfo.subtitle}
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievements Grid -->
+  <div class="py-20 bg-[#0a0a0a]">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {personalInfo.achievements.map(achievement => (
+          <div class="bg-gradient-to-br from-purple-900/40 to-pink-900/40 p-6 rounded-xl text-white text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20 border border-purple-500/20 backdrop-blur-sm">
+            <p class="font-bold glow-text-sm">{achievement}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Education Section -->
+  <div class="py-20 bg-black">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-12 glow-text">Educational Journey</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        {education.map(edu => (
+          <div class="bg-gradient-to-br from-purple-900/20 to-pink-900/20 p-8 rounded-2xl backdrop-blur-lg transform hover:scale-105 transition-all duration-300 border border-purple-500/20 hover:border-purple-500/40">
+            <h3 class="text-3xl font-bold text-purple-400 mb-2 glow-text-sm">{edu.school}</h3>
+            <p class="text-pink-300/90">{edu.degree}</p>
+            <p class="text-gray-400">{edu.period}</p>
+            <p class="text-yellow-400/90 mt-2 font-bold glow-text-sm">{edu.highlight}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Gallery -->
+  <div class="py-20 bg-black">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {images.map((image, index) => (
+          <div class="group relative overflow-hidden rounded-xl border border-purple-500/20">
+            <img 
+              src={image.url} 
+              alt={image.caption}
+              class="w-full h-96 object-cover transform group-hover:scale-110 transition-all duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <p class="text-white font-bold text-xl glow-text-sm">{image.caption}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 1s forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+  }
+
+  .animate-slide-up-delay {
+    animation: slide-up 1s forwards;
+    animation-delay: 0.6s;
+    opacity: 0;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 15px rgba(168, 85, 247, 0.5),
+                 0 0 30px rgba(168, 85, 247, 0.3);
+  }
+
+  .glow-text-sm {
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.4),
+                 0 0 20px rgba(168, 85, 247, 0.2);
+  }
+
+  /* Animated gradient background */
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .bg-animate {
+    background-size: 200% 200%;
+    animation: gradient-shift 1s ease infinite;
+  }
+
+  /* Enhanced image hover effect */
+  .group:hover img {
+    filter: brightness(0.8) contrast(1.2);
+  }
+</style> 

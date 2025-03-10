@@ -2,46 +2,48 @@
 const projects = [
   {
     title: "Project 1",
-    description: "A brief description of project 1",
-    tags: ["React", "TailwindCSS", "Node.js"],
-    image: "/placeholder-project.jpg"
+    description: "Description of project 1",
+    image: "https://i.imgur.com/inWtp1M.png",  // Using Winnie pic
+    link: "#"
   },
   {
     title: "Project 2",
-    description: "A brief description of project 2",
-    tags: ["Python", "Machine Learning"],
-    image: "/placeholder-project.jpg"
+    description: "Description of project 2",
+    image: "https://i.imgur.com/Zt74Koe.png",  // Using Winnie pic
+    link: "#"
   },
-  // Add more projects as needed
+  {
+    title: "Project 3",
+    description: "Description of project 3",
+    image: "https://i.imgur.com/LZwsBev.png",  // Using Winnie pic
+    link: "#"
+  },
+  {
+    title: "Project 4",
+    description: "Description of project 4",
+    image: "https://i.imgur.com/4vJ8cwV.png",  // Using Winnie pic
+    link: "#"
+  }
 ];
 ---
 
-<section id="portfolio" class="py-20 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-3xl font-bold mb-12 text-center">My Projects</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {
-        projects.map((project) => (
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <img 
-              src={project.image} 
-              alt={project.title}
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">{project.title}</h3>
-              <p class="text-gray-600 mb-4">{project.description}</p>
-              <div class="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span class="px-2 py-1 bg-gray-100 rounded-full text-sm">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+<div class="max-w-6xl mx-auto px-4">
+  <h2 class="text-3xl font-bold mb-8">Portfolio</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {projects.map((project) => (
+      <a href={project.link} class="block group">
+        <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform group-hover:scale-105">
+          <img 
+            src={project.image} 
+            alt={project.title} 
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2">{project.title}</h3>
+            <p class="text-gray-600">{project.description}</p>
           </div>
-        ))
-      }
-    </div>
+        </div>
+      </a>
+    ))}
   </div>
-</section> 
+</div> 
