@@ -84,7 +84,7 @@ const achievements = [
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {standardizedScores.map((test) => (
-              <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <a href="https://gubei.suis.com.cn/" target="_blank" class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
                 <div class="text-xl font-bold text-blue-800 mb-2">{test.test}</div>
                 <div class="text-3xl font-bold text-indigo-600 mb-2">{test.score}</div>
                 <div class="text-sm text-gray-600">{test.year}</div>
@@ -93,7 +93,7 @@ const achievements = [
                     <li class="text-gray-700">{detail}</li>
                   ))}
                 </ul>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -106,7 +106,7 @@ const achievements = [
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {skills.map((skill) => (
-              <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
+              <a href="https://gubei.suis.com.cn/" target="_blank" class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
                 <div class="flex items-center justify-between mb-2">
                   <div class="font-bold text-xl text-gray-800">{skill.name}</div>
                   <div class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
@@ -114,7 +114,7 @@ const achievements = [
                   </div>
                 </div>
                 <p class="text-gray-600">{skill.description}</p>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -127,7 +127,7 @@ const achievements = [
           </h3>
           <div class="space-y-4">
             {achievements.map((achievement) => (
-              <div class="bg-gradient-to-r from-white to-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+              <a href="https://gubei.suis.com.cn/" target="_blank" class="bg-gradient-to-r from-white to-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                 <div class="flex justify-between items-start mb-2">
                   <h4 class="text-xl font-bold text-gray-800">{achievement.title}</h4>
                   <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
@@ -135,7 +135,7 @@ const achievements = [
                   </span>
                 </div>
                 <p class="text-gray-600">{achievement.description}</p>
-              </div>
+              </a>
             ))}
           </div>
         </div>
