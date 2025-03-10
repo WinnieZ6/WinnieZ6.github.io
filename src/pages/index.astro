@@ -5,10 +5,33 @@ import About from '../components/About.astro';
 import Education from '../components/Education.astro';
 import Portfolio from '../components/Portfolio.astro';
 // import Files from '../components/Files.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
 <MainLayout title="Winnie - Personal Website">
   <Navigation />
+  <!-- Top image -->
+  <div class="w-full flex justify-center mt-8">
+    <img 
+      src="https://i.imgur.com/ARtexF8.png" 
+      alt="Top decorative image" 
+      class="w-64 h-auto"
+    />
+  </div>
+
+  <!-- Floating button -->
+  <div class="winnie-playground fixed inset-0 pointer-events-none z-50"></div>
+
+  <button id="winnieButton" class="fixed bottom-8 right-8 bg-pink-400 hover:bg-pink-500 text-white rounded-full p-4 shadow-lg transform hover:scale-110 transition-transform z-50">
+    🌸 Winnie Explosion! 🌸
+  </button>
+
+  <!-- Full screen overlay for the final image -->
+  <div id="finalImage" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-[60]" style="opacity: 0;">
+    <img src="https://i.imgur.com/RmrQ1ZC.png" alt="Winnie" class="max-w-[90vw] max-h-[90vh] object-contain cursor-pointer" />
+  </div>
+
+  <!-- Your existing content -->
   <main class="space-y-20 mb-20">
     <div class="max-w-6xl mx-auto px-4 pt-20">
       <h1 class="text-4xl font-bold text-center">Welcome to My Website</h1>
@@ -18,4 +41,211 @@ import Portfolio from '../components/Portfolio.astro';
     <Portfolio />
     <!-- <Files /> -->
   </main>
-</MainLayout> 
+
+  <!-- Custom cursor -->
+  <div id="custom-cursor" class="hidden lg:block fixed pointer-events-none z-50">
+    <img 
+      src="https://i.imgur.com/qiKBzWq.png" 
+      alt="Custom cursor" 
+      class="w-16 h-16"
+    />
+  </div>
+</MainLayout>
+
+<style>
+  /* Hide default cursor on desktop */
+  @media (min-width: 1024px) {
+    body {
+      cursor: none;
+    }
+  }
+
+  #custom-cursor {
+    transform: translate(-50%, -50%);
+  }
+
+  .falling-winnie {
+    position: fixed;
+    z-index: 55;
+    pointer-events: none;
+    opacity: 1;
+    will-change: transform;
+  }
+
+  @keyframes fall {
+    from {
+      transform: translateY(-20vh) rotate(0deg);
+    }
+    to {
+      transform: translateY(120vh) rotate(720deg);
+    }
+  }
+
+  #finalImage.fade-in {
+    animation: fadeIn 1s forwards;
+  }
+
+  #finalImage.fade-out {
+    animation: fadeOut 1s forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  .winnie {
+    position: absolute;
+    display: inline-block;
+    user-select: none;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: drop-shadow(0 0 10px rgba(255,192,203,0.5));  /* Add pink glow */
+  }
+
+  @keyframes explode {
+    0% {
+      transform: translate(-50%, -50%) scale(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--r));
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  // Custom cursor movement
+  const cursor = document.getElementById('custom-cursor');
+  
+  document.addEventListener('mousemove', (e) => {
+    if (cursor) {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    }
+  });
+
+  const winnieImages = [
+    'https://i.imgur.com/qiKBzWq.png',
+    'https://i.imgur.com/EaB5HNn.png',
+    'https://i.imgur.com/RmrQ1ZC.png',
+    'https://i.imgur.com/tuMqJ5R.png'
+  ];
+
+  const playground = document.querySelector('.winnie-playground');
+  const button = document.getElementById('winnieButton');
+  let isAnimating = false;
+
+  function createWinnieExplosion(x, y) {
+    if (!playground || isAnimating) return;
+    isAnimating = true;
+
+    const numWinnies = 40;  // More Winnies!
+    const explosionRadius = Math.min(window.innerWidth, window.innerHeight) * 0.6; // Bigger radius
+
+    for (let i = 0; i < numWinnies; i++) {
+      const winnie = document.createElement('img');
+      winnie.src = winnieImages[Math.floor(Math.random() * winnieImages.length)];
+      winnie.className = 'winnie';
+      
+      // Larger size between 60 and 120 pixels
+      const size = 60 + Math.random() * 60;
+      winnie.style.width = `${size}px`;
+      winnie.style.height = `${size}px`;
+
+      // Position at click point
+      winnie.style.left = `${x}px`;
+      winnie.style.top = `${y}px`;
+
+      // Calculate random end position with more variation
+      const angle = (i / numWinnies) * 2 * Math.PI + (Math.random() * 0.5 - 0.25);
+      const distance = explosionRadius * (0.4 + Math.random() * 0.6);
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance;
+      const rotation = Math.random() * 1080 - 540; // More rotation
+
+      // Set animation properties
+      winnie.style.setProperty('--tx', `${tx}px`);
+      winnie.style.setProperty('--ty', `${ty}px`);
+      winnie.style.setProperty('--r', `${rotation}deg`);
+      
+      // Longer duration between 2-3 seconds
+      const duration = 2 + Math.random();
+      winnie.style.animation = `explode ${duration}s forwards`;
+
+      playground.appendChild(winnie);
+
+      // Clean up after animation
+      winnie.addEventListener('animationend', () => {
+        winnie.remove();
+      });
+    }
+
+    // Create a second wave after a short delay
+    setTimeout(() => {
+      for (let i = 0; i < 20; i++) {
+        const winnie = document.createElement('img');
+        winnie.src = winnieImages[Math.floor(Math.random() * winnieImages.length)];
+        winnie.className = 'winnie';
+        
+        const size = 40 + Math.random() * 40;
+        winnie.style.width = `${size}px`;
+        winnie.style.height = `${size}px`;
+        
+        winnie.style.left = `${x}px`;
+        winnie.style.top = `${y}px`;
+        
+        const angle = Math.random() * Math.PI * 2;
+        const distance = explosionRadius * 0.7 * Math.random();
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        const rotation = Math.random() * 720 - 360;
+        
+        winnie.style.setProperty('--tx', `${tx}px`);
+        winnie.style.setProperty('--ty', `${ty}px`);
+        winnie.style.setProperty('--r', `${rotation}deg`);
+        
+        const duration = 2.5 + Math.random();
+        winnie.style.animation = `explode ${duration}s forwards`;
+        
+        playground.appendChild(winnie);
+        
+        winnie.addEventListener('animationend', () => {
+          winnie.remove();
+        });
+      }
+    }, 200);
+
+    // Allow new explosions after all animations complete
+    setTimeout(() => {
+      isAnimating = false;
+    }, 3000);  // Longer cooldown
+  }
+
+  // Create explosion from button click
+  button?.addEventListener('click', (e) => {
+    const rect = button.getBoundingClientRect();
+    createWinnieExplosion(
+      rect.left + rect.width / 2,
+      rect.top + rect.height / 2
+    );
+  });
+
+  // Create explosion from any click on the document
+  document.addEventListener('click', (e) => {
+    if (e.target !== button) {
+      createWinnieExplosion(e.clientX, e.clientY);
+    }
+  });
+</script> 

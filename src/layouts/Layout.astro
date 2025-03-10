@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Your description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/images/top-image.png" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html> 
