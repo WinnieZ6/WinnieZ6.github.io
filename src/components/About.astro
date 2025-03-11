@@ -59,6 +59,37 @@ const achievements = [
       About Me
     </h2>
     
+    <!-- SoundCloud Player for "Yeah" by Usher -->
+    <div class="mb-12">
+      <h3 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="text-purple-600 mr-2">🎶</span>
+        Listen to My Favorite Track
+      </h3>
+      <iframe 
+        width="100%" 
+        height="166" 
+        scrolling="no" 
+        frameborder="no" 
+        allow="autoplay" 
+        src="files/yeah.mp3">
+      </iframe>
+    </div>
+
+    <!-- Animated Image Section -->
+    <div class="mb-12">
+      <h3 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="text-purple-600 mr-2">🌈</span>
+        My Favorite Image
+      </h3>
+      <div class="relative overflow-hidden">
+        <img 
+          src="https://i.imgur.com/inWtp1M.png" 
+          alt="My Favorite" 
+          class="w-full h-auto transition-transform duration-500 animate-rainbow-filter"
+        />
+      </div>
+    </div>
+
     <div class="bg-white p-8 rounded-2xl shadow-xl">
       <div class="prose prose-lg mx-auto">
         <!-- Introduction Section with Gradient Border -->
@@ -175,4 +206,18 @@ const achievements = [
       </div>
     </div>
   </div>
+
+  <style>
+    @keyframes rainbow-filter {
+      0% { filter: hue-rotate(0deg); }
+      25% { filter: hue-rotate(90deg); }
+      50% { filter: hue-rotate(180deg); }
+      75% { filter: hue-rotate(270deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    .animate-rainbow-filter {
+      animation: rainbow-filter 10s infinite linear;
+    }
+  </style>
 </section> 
