@@ -68,6 +68,16 @@ const images = [
     </div>
   </div>
 
+  <!-- Floating Icon for Fullscreen Image -->
+  <div class="floating-icon" onClick={() => document.getElementById('fullscreen-image').style.display = 'flex'}>
+    <img src="/files/cit.jpg" alt="Alma Mater" />
+  </div>
+
+  <!-- Fullscreen Image Container -->
+  <div id="fullscreen-image" class="fullscreen-image" style="display: none;" onClick={() => document.getElementById('fullscreen-image').style.display = 'none'}>
+    <img src="/files/cit.jpg" alt="Cit" class="fullscreen-img" />
+  </div>
+
   <!-- Achievements Grid -->
   <div class="py-20 bg-black">
     <div class="max-w-6xl mx-auto px-4">
@@ -184,4 +194,32 @@ const images = [
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
-</style> 
+
+  /* Fullscreen image styles */
+  .fullscreen-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* 半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* 确保全屏图像在最上层 */
+  }
+
+  .fullscreen-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* 保持图像比例 */
+  }
+
+  .floating-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1000; /* 确保图标在最上层 */
+  }
+</style>
