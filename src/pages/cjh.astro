@@ -4,12 +4,12 @@ import MainLayout from '../layouts/MainLayout.astro';
 const personalInfo = {
   name: "CJH (JACK)",
   title: "The Legendary Leader of Changshu",
-  subtitle: "Owner of Elephant Training House | Elite Bodybuilder",
+  subtitle: "UC Berkeley Class of 2029 | Elite Bodybuilder",
   achievements: [
     "Changshu's Premier Bodybuilding Champion",
     "Founder of Elephant Training House",
     "Fitness Icon of Jiangsu Province",
-    "Mentor to Countless Athletes"
+    "UC Berkeley Computer Science Admit"
   ]
 };
 
@@ -36,47 +36,71 @@ const images = [
 ---
 
 <MainLayout title="CJH - The Legend of Changshu">
-  <!-- Hero Section with Parallax -->
-  <div class="relative h-screen overflow-hidden bg-black">
-    <div class="absolute inset-0 bg-gradient-to-br from-black via-purple-900/30 to-black"></div>
-    <div class="relative max-w-6xl mx-auto px-4 pt-48 text-white text-center">
-      <h1 class="text-8xl font-bold mb-4 animate-fade-in bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
+  <!-- Hero Section with UC Berkeley Celebration -->
+  <div class="relative min-h-screen overflow-y-auto bg-black pb-20">
+    <!-- Dynamic Background with UC Berkeley Colors -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#003262] via-black to-[#FDB515] animate-gradient-shift"></div>
+    
+    <!-- Floating Confetti Animation -->
+    <div class="confetti-container"></div>
+    
+    <div class="relative max-w-6xl mx-auto px-4 pt-20 text-white text-center">
+      <!-- UC Berkeley Logo -->
+      <div class="flex justify-center mb-8 animate-bounce-slow">
+        <img src="/files/ucberkeley.svg" alt="UC Berkeley" class="w-40 h-40 animate-pulse-glow" />
+      </div>
+      
+      <!-- Main Celebration Text -->
+      <h1 class="text-8xl font-bold mb-4 animate-fade-in bg-clip-text text-transparent bg-gradient-to-r from-[#FDB515] to-yellow-300">
         {personalInfo.name}
       </h1>
-      <div class="text-4xl font-bold mb-2 text-purple-300 animate-slide-up glow-text">
+      <div class="text-4xl font-bold mb-2 text-[#FDB515] animate-slide-up glow-text">
         {personalInfo.title}
       </div>
-      <div class="text-2xl text-pink-400/80 mb-8 animate-slide-up-delay">
+      <div class="text-2xl text-white mb-8 animate-slide-up-delay">
         {personalInfo.subtitle}
       </div>
       
-      <!-- Added Text Section, now positioned lower -->
-      <div class="absolute inset-x-0 bottom-10 mb-20 text-center">
-        <div class="text-5xl font-bold text-red-600 transform rotate-12 animate-float">
-          常熟理工
+      <!-- Celebration Banner -->
+      <div class="celebration-banner py-8 px-6 rounded-xl bg-gradient-to-r from-[#003262] to-[#3B7EA1] border-2 border-[#FDB515] shadow-2xl animate-float mb-16 mx-auto max-w-4xl">
+        <h2 class="text-6xl font-extrabold text-[#FDB515] mb-4 animate-text-shimmer">CONGRATULATIONS!</h2>
+        <p class="text-3xl text-white font-bold">ON YOUR ACCEPTANCE TO</p>
+        <p class="text-5xl font-extrabold text-[#FDB515] mt-4 animate-pulse-text">UC BERKELEY</p>
+        <div class="mt-6 flex justify-center space-x-3">
+          <span class="inline-block w-4 h-4 bg-[#FDB515] rounded-full animate-ping-slow"></span>
+          <span class="inline-block w-4 h-4 bg-white rounded-full animate-ping-slow delay-100"></span>
+          <span class="inline-block w-4 h-4 bg-[#FDB515] rounded-full animate-ping-slow delay-200"></span>
+          <span class="inline-block w-4 h-4 bg-white rounded-full animate-ping-slow delay-300"></span>
+          <span class="inline-block w-4 h-4 bg-[#FDB515] rounded-full animate-ping-slow delay-400"></span>
         </div>
-        <div class="text-4xl font-bold text-yellow-500 transform rotate-6 animate-float">
-          世界上最好的大學
+      </div>
+      
+      <!-- Class of 2029 Banner -->
+      <div class="text-center mb-8">
+        <div class="inline-block bg-[#003262] text-[#FDB515] text-3xl font-bold py-2 px-6 rounded-full border-2 border-[#FDB515] animate-pulse-border">
+          Class of 2029
         </div>
-        <div class="text-3xl font-bold text-blue-400 transform rotate-3 animate-float">
-          趕緊給我入學
+      </div>
+      
+      <!-- Dramatic CJH Image Display -->
+      <div class="mt-12 mb-16 relative h-[500px]">
+        <!-- Main rotating image -->
+        <div class="relative z-10 animate-rotate-slow">
+          <img src="/files/cjh.png" alt="CJH" class="w-96 h-auto mx-auto animate-pulse-glow-intense" />
         </div>
-        <div class="text-2xl font-bold text-green-300 transform rotate-0 animate-float">
-          -來自我的手機呢 褚嘉豪
+        
+        <!-- Duplicated background images with different animations -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 scale-110 opacity-60 animate-rotate-reverse">
+          <img src="/files/cjh.png" alt="CJH Background" class="w-96 h-auto mx-auto filter hue-rotate-15" />
+        </div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 scale-125 opacity-40 animate-pulse-slow">
+          <img src="/files/cjh.png" alt="CJH Background" class="w-96 h-auto mx-auto filter hue-rotate-30" />
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Floating Icon for Fullscreen Image -->
-  <div class="floating-icon" onClick={() => document.getElementById('fullscreen-image').style.display = 'flex'}>
-    <img src="/files/cit.jpg" alt="Alma Mater" />
-  </div>
 
-  <!-- Fullscreen Image Container -->
-  <div id="fullscreen-image" class="fullscreen-image" style="display: none;" onClick={() => document.getElementById('fullscreen-image').style.display = 'none'}>
-    <img src="/files/cit.jpg" alt="Cit" class="fullscreen-img" />
-  </div>
 
   <!-- Achievements Grid -->
   <div class="py-20 bg-black">
@@ -132,6 +156,7 @@ const images = [
 </MainLayout>
 
 <style>
+  /* Base animations */
   @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -158,14 +183,15 @@ const images = [
     opacity: 0;
   }
 
+  /* Glow effects */
   .glow-text {
-    text-shadow: 0 0 15px rgba(168, 85, 247, 0.5),
-                 0 0 30px rgba(168, 85, 247, 0.3);
+    text-shadow: 0 0 15px rgba(253, 181, 21, 0.7),
+                 0 0 30px rgba(253, 181, 21, 0.5);
   }
 
   .glow-text-sm {
-    text-shadow: 0 0 10px rgba(168, 85, 247, 0.4),
-                 0 0 20px rgba(168, 85, 247, 0.2);
+    text-shadow: 0 0 10px rgba(253, 181, 21, 0.6),
+                 0 0 20px rgba(253, 181, 21, 0.4);
   }
 
   /* Animated gradient background */
@@ -175,9 +201,9 @@ const images = [
     100% { background-position: 0% 50%; }
   }
 
-  .bg-animate {
-    background-size: 200% 200%;
-    animation: gradient-shift 1s ease infinite;
+  .animate-gradient-shift {
+    background-size: 300% 300%;
+    animation: gradient-shift 8s ease infinite;
   }
 
   /* Enhanced image hover effect */
@@ -185,41 +211,193 @@ const images = [
     filter: brightness(0.8) contrast(1.2);
   }
 
+  /* Float animation */
   @keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
+    0% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+    100% { transform: translateY(0) rotate(0); }
   }
 
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
 
-  /* Fullscreen image styles */
-  .fullscreen-image {
-    position: fixed;
-    top: 0;
-    left: 0;
+  /* UC Berkeley celebration animations */
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 4s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(253, 181, 21, 0.7)); }
+    50% { filter: drop-shadow(0 0 30px rgba(253, 181, 21, 1)); }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  
+  @keyframes text-shimmer {
+    0% { text-shadow: 0 0 10px rgba(253, 181, 21, 0.3), 0 0 20px rgba(253, 181, 21, 0.3); }
+    50% { text-shadow: 0 0 20px rgba(253, 181, 21, 0.8), 0 0 30px rgba(253, 181, 21, 0.8); }
+    100% { text-shadow: 0 0 10px rgba(253, 181, 21, 0.3), 0 0 20px rgba(253, 181, 21, 0.3); }
+  }
+  
+  .animate-text-shimmer {
+    animation: text-shimmer 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-text {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.05); }
+  }
+  
+  .animate-pulse-text {
+    animation: pulse-text 2s ease-in-out infinite;
+  }
+  
+  @keyframes ping-slow {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .animate-ping-slow {
+    animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+  
+  .delay-400 {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(253, 181, 21, 0.7); }
+    50% { box-shadow: 0 0 0 10px rgba(253, 181, 21, 0); }
+  }
+  
+  .animate-pulse-border {
+    animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Confetti animation */
+  .confetti-container {
+    position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* 半透明背景 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999; /* 确保全屏图像在最上层 */
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  .confetti-container::before,
+  .confetti-container::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0.7;
+    border-radius: 10%;
+  }
+  
+  .confetti-container::before {
+    background-color: #003262;
+    left: 10%;
+    top: -10px;
+    animation: confetti-fall 10s linear infinite, confetti-shake 3s ease-in-out infinite;
+  }
+  
+  .confetti-container::after {
+    background-color: #FDB515;
+    right: 10%;
+    top: -20px;
+    animation: confetti-fall 7s linear infinite 1s, confetti-shake 4s ease-in-out infinite 1s;
+  }
+  
+  @keyframes confetti-fall {
+    0% { top: -10px; }
+    100% { top: 100%; }
+  }
+  
+  @keyframes confetti-shake {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+  }
+  
+  /* Generate multiple confetti pieces using pseudo-elements */
+  .confetti-container::before {
+    box-shadow: 
+      100px 40px 0 0 #FDB515,
+      200px 300px 0 0 #003262,
+      300px 100px 0 0 #FDB515,
+      400px 200px 0 0 #003262,
+      500px 50px 0 0 #FDB515,
+      600px 150px 0 0 #003262,
+      700px 250px 0 0 #FDB515,
+      800px 120px 0 0 #003262;
+  }
+  
+  .confetti-container::after {
+    box-shadow: 
+      150px 80px 0 0 #003262,
+      250px 200px 0 0 #FDB515,
+      350px 50px 0 0 #003262,
+      450px 150px 0 0 #FDB515,
+      550px 250px 0 0 #003262,
+      650px 100px 0 0 #FDB515,
+      750px 200px 0 0 #003262,
+      850px 50px 0 0 #FDB515;
+  }
+  
+  /* Dramatic CJH image animations */
+  @keyframes rotate-slow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes rotate-reverse {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+  }
+  
+  @keyframes pulse-glow-intense {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(253, 181, 21, 0.8)); }
+    50% { filter: drop-shadow(0 0 40px rgba(253, 181, 21, 1)); }
+  }
+  
+  .animate-rotate-slow {
+    animation: rotate-slow 20s linear infinite;
+  }
+  
+  .animate-rotate-reverse {
+    animation: rotate-reverse 15s linear infinite;
+  }
+  
+  .animate-pulse-glow-intense {
+    animation: pulse-glow-intense 3s ease-in-out infinite;
+  }
+  
+  .filter.hue-rotate-15 {
+    filter: hue-rotate(15deg);
+  }
+  
+  .filter.hue-rotate-30 {
+    filter: hue-rotate(30deg);
   }
 
-  .fullscreen-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* 保持图像比例 */
-  }
 
-  .floating-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    cursor: pointer;
-    z-index: 1000; /* 确保图标在最上层 */
-  }
 </style>
