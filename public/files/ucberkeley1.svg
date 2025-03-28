@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <!-- UC Berkeley Colors: Blue (#003262) and Gold (#FDB515) -->
+  <!-- Main Shield -->
+  <path d="M250 50 L400 150 L400 350 L250 450 L100 350 L100 150 Z" fill="#003262" stroke="#FDB515" stroke-width="10"/>
+  
+  <!-- Cal Text -->
+  <text x="250" y="200" font-family="Arial, sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="#FDB515">CAL</text>
+  
+  <!-- UC Berkeley Text -->
+  <text x="250" y="280" font-family="Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" fill="#FDB515">UC BERKELEY</text>
+  
+  <!-- Laurel Wreath Left -->
+  <path d="M150 320 C180 280, 200 260, 220 250" stroke="#FDB515" stroke-width="5" fill="none"/>
+  <path d="M150 330 C180 300, 210 280, 230 270" stroke="#FDB515" stroke-width="5" fill="none"/>
+  <path d="M150 340 C180 320, 220 300, 240 290" stroke="#FDB515" stroke-width="5" fill="none"/>
+  
+  <!-- Laurel Wreath Right -->
+  <path d="M350 320 C320 280, 300 260, 280 250" stroke="#FDB515" stroke-width="5" fill="none"/>
+  <path d="M350 330 C320 300, 290 280, 270 270" stroke="#FDB515" stroke-width="5" fill="none"/>
+  <path d="M350 340 C320 320, 280 300, 260 290" stroke="#FDB515" stroke-width="5" fill="none"/>
+  
+  <!-- Stars -->
+  <circle cx="250" y="350" r="10" fill="#FDB515"/>
+  <circle cx="200" y="350" r="8" fill="#FDB515"/>
+  <circle cx="300" y="350" r="8" fill="#FDB515"/>
+</svg>
