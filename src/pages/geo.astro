@@ -1,0 +1,19 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import GeoGame from '../components/GeoGame.jsx';
+---
+<MainLayout title="Geo - Question Draw">
+  <!-- Render the interactive GeoGame component -->
+  <GeoGame client:load />
+
+  <style>
+    /* Spin animation for the slot machine effect */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-spin {
+      animation: spin 2s linear infinite;
+    }
+  </style>
+</MainLayout>
