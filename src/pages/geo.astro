@@ -1,10 +1,91 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import GeoGame from '../components/GeoGame.jsx';
 ---
 <MainLayout title="Geo - Question Draw">
-  <!-- Render the interactive GeoGame component -->
-  <GeoGame client:load />
+  <div id="geoGame" class="flex flex-col items-center justify-center h-screen bg-black relative">
+    <!-- Slot Machine Animation -->
+    <div class="relative w-80 h-80 flex justify-center items-center bg-gray-800 rounded-lg shadow-xl mb-8 overflow-hidden">
+      <!-- Spinning gradient background -->
+      <div class="absolute inset-0 bg-gradient-to-r from-yellow-300 via-red-300 to-purple-400 animate-spin"></div>
+      <!-- Concentric circles for effect -->
+      <div class="absolute w-32 h-32 bg-white rounded-full"></div>
+      <div class="absolute w-24 h-24 bg-gray-200 rounded-full"></div>
+      <div class="absolute w-16 h-16 bg-gray-800 rounded-full"></div>
+    </div>
+
+    <!-- Display current question -->
+    <div id="questionDisplay" class="text-3xl font-bold text-white bg-black bg-opacity-50 px-8 py-4 rounded-lg mb-8 text-center">
+      Press 'Draw Question' to begin
+    </div>
+
+    <!-- Action buttons -->
+    <div class="flex space-x-4">
+      <button id="drawQuestion" class="px-6 py-3 bg-yellow-500 text-white font-bold rounded-lg shadow-lg hover:bg-yellow-600 transition">
+        Draw Question
+      </button>
+      <button id="resetGame" class="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition">
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <!-- Client-side interactivity -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Pool of questions
+      const allQuestions = [
+        "Discuss the relationships between globalisation and human development [16]",
+        "(a) Using examples, analyse the influence of diaspora populations on the cultural identity of different places. [12]",
+        "Analyse the reasons why people’s freedom to participate in global interactions varies from place to place. [12]",
+        "Using examples, analyse the reasons why some national governments introduce trade restrictions.",
+        "Explain how microfinance organizations and alternative trading networks can help communities to develop. [12]",
+        "Using examples, analyse ways in which global interactions can lead to improved gender equality. [12]",
+        "Discuss the relationships between globalisation and human development [16]",
+        "Analyse the validity and reliability of two indicators of human development [12]"
+      ];
+
+      // Initialize state variables
+      let remaining = [...allQuestions];
+      let currentQuestion = null;
+
+      // DOM element references
+      const display = document.getElementById('questionDisplay');
+      const drawButton = document.getElementById('drawQuestion');
+      const resetButton = document.getElementById('resetGame');
+
+      // Update question display
+      function updateDisplay() {
+        display.textContent = currentQuestion ? currentQuestion : "Press 'Draw Question' to begin";
+      }
+
+      // Draw a random question
+      function drawQuestion() {
+        if (remaining.length === 0) {
+          currentQuestion = "All questions have been drawn. Please restart the game.";
+        } else {
+          const randomIndex = Math.floor(Math.random() * remaining.length);
+          currentQuestion = remaining[randomIndex];
+          // Remove selected question from the list
+          remaining.splice(randomIndex, 1);
+        }
+        updateDisplay();
+      }
+
+      // Reset the game
+      function resetGame() {
+        remaining = [...allQuestions];
+        currentQuestion = null;
+        updateDisplay();
+      }
+
+      // Attach event listeners to buttons
+      drawButton.addEventListener('click', drawQuestion);
+      resetButton.addEventListener('click', resetGame);
+
+      // Initialize display
+      updateDisplay();
+    });
+  </script>
 
   <style>
     /* Spin animation for the slot machine effect */
