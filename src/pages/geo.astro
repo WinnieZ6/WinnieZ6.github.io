@@ -2,37 +2,52 @@
 import MainLayout from '../layouts/MainLayout.astro';
 ---
 <MainLayout title="Geo - Question Draw">
-  <div id="geoGame" class="flex flex-col items-center justify-center h-screen bg-black relative">
-    <!-- Slot Machine Animation -->
-    <div class="relative w-80 h-80 flex justify-center items-center bg-gray-800 rounded-lg shadow-xl mb-8 overflow-hidden">
-      <!-- Spinning gradient background -->
-      <div class="absolute inset-0 bg-gradient-to-r from-yellow-300 via-red-300 to-purple-400 animate-spin"></div>
-      <!-- Concentric circles for effect -->
-      <div class="absolute w-32 h-32 bg-white rounded-full"></div>
-      <div class="absolute w-24 h-24 bg-gray-200 rounded-full"></div>
-      <div class="absolute w-16 h-16 bg-gray-800 rounded-full"></div>
+  <div id="geoGame" class="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-950 to-black">
+    <!-- Slot Machine Container -->
+    <div id="slotMachine" class="relative w-80 h-24 bg-gradient-to-b from-gray-800 to-gray-900 border-4 border-cyan-500 rounded-lg flex justify-between items-center px-4 py-2 mb-10 shadow-lg">
+      <!-- Three Digit Reels -->
+      <div class="reel w-16 h-16 bg-black/80 rounded-md flex items-center justify-center text-4xl font-bold text-white overflow-hidden">
+        <div class="reel-content">0</div>
+      </div>
+      <div class="reel w-16 h-16 bg-black/80 rounded-md flex items-center justify-center text-4xl font-bold text-white overflow-hidden">
+        <div class="reel-content">0</div>
+      </div>
+      <div class="reel w-16 h-16 bg-black/80 rounded-md flex items-center justify-center text-4xl font-bold text-white overflow-hidden">
+        <div class="reel-content">0</div>
+      </div>
     </div>
 
-    <!-- Display current question -->
-    <div id="questionDisplay" class="text-3xl font-bold text-white bg-black bg-opacity-50 px-8 py-4 rounded-lg mb-8 text-center">
+    <!-- Background Music -->
+<audio id="backgroundMusic" loop autoplay>
+  <source src="/files/geo.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+    <!-- Question Display -->
+    <div id="questionDisplay" class="text-xl font-semibold text-white bg-black/70 px-8 py-4 rounded-xl mb-8 max-w-3xl text-center shadow-lg">
       Press 'Draw Question' to begin
     </div>
 
-    <!-- Action buttons -->
-    <div class="flex space-x-4">
-      <button id="drawQuestion" class="px-6 py-3 bg-yellow-500 text-white font-bold rounded-lg shadow-lg hover:bg-yellow-600 transition">
+    <!-- Buttons -->
+    <div class="flex space-x-6">
+      <button id="drawButton" class="px-8 py-3 bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold rounded-xl shadow-md hover:from-yellow-500 hover:to-orange-500 transition">
         Draw Question
       </button>
-      <button id="resetGame" class="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition">
+      <button id="resetButton" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold rounded-xl shadow-md hover:from-blue-700 hover:to-cyan-700 transition">
         Reset
       </button>
     </div>
   </div>
 
-  <!-- Client-side interactivity -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Pool of questions
+    document.addEventListener("DOMContentLoaded", () => {
+      // DOM Elements
+      const drawButton = document.getElementById("drawButton");
+      const resetButton = document.getElementById("resetButton");
+      const questionDisplay = document.getElementById("questionDisplay");
+      const reels = document.querySelectorAll(".reel-content");
+
+      // Question Pool
       const allQuestions = [
         "Discuss the relationships between globalisation and human development [16]",
         "(a) Using examples, analyse the influence of diaspora populations on the cultural identity of different places. [12]",
@@ -41,60 +56,120 @@ import MainLayout from '../layouts/MainLayout.astro';
         "Explain how microfinance organizations and alternative trading networks can help communities to develop. [12]",
         "Using examples, analyse ways in which global interactions can lead to improved gender equality. [12]",
         "Discuss the relationships between globalisation and human development [16]",
-        "Analyse the validity and reliability of two indicators of human development [12]"
+        "Analyse the validity and reliability of two indicators of human development [12]",
+        "Analyse the ways in which cultural traits are spread from place to place.",
+        "Analyse the validity and reliability of two indicators of human development.",
+        "Using examples, analyse ways in which global interactions can lead to improved gender equality.",
+        "Discuss ways in which communications technology can help and hinder human development processes.",
+        "“The negative environmental impacts of globalization are beginning to lessen.” Discuss this statement.",
+        "Explain how microfinance organizations and alternative trading networks can help communities to develop.",
+        "“The environmental costs of global economic growth outweigh the social gains.” To what extent do you agree with this statement?",
+        "Explain the strengths of the United Nations (UN) Sustainable Development Goals as a way of supporting the human development process.",
+        "Analyse the ways in which cultural traits are spread from place to place",
+        "Physical factors are the main reason why cultural diversity varies from place to place.” Discuss this statement",
+        "Cultural changes caused by globalization have affected urban and rural places equally.” Discuss this statement",
+        "Using examples, analyse the links between cultural diversity and cultural hybridity",
+        "Economic challenges are the main cause of opposition to globalization.” To what extent do you agree with this statement?"
       ];
 
-      // Initialize state variables
       let remaining = [...allQuestions];
-      let currentQuestion = null;
+      let animationTimeout;
 
-      // DOM element references
-      const display = document.getElementById('questionDisplay');
-      const drawButton = document.getElementById('drawQuestion');
-      const resetButton = document.getElementById('resetGame');
+      // Animate Slot Machine Reels
+      function animateReels(callback) {
+        reels.forEach((reel, index) => {
+          let count = 0;
+          const duration = 2000; // 2 seconds
+          const interval = 100; // Update every 100ms
+          const maxCount = duration / interval;
 
-      // Update question display
-      function updateDisplay() {
-        display.textContent = currentQuestion ? currentQuestion : "Press 'Draw Question' to begin";
+          const spin = setInterval(() => {
+            count++;
+            reel.textContent = Math.floor(Math.random() * 10); // Random digit 0-9
+            if (count >= maxCount - index * 2) { // Staggered stop
+              clearInterval(spin);
+              reel.textContent = Math.floor(Math.random() * 8) + 1; // Final digit 1-8
+              if (index === reels.length - 1) {
+                callback();
+              }
+            }
+          }, interval);
+
+          // Add CSS animation for smooth scrolling
+          reel.style.animation = `scrollDigits 0.1s linear infinite`;
+          setTimeout(() => {
+            reel.style.animation = "";
+          }, duration - index * 200); // Stop animation with stagger
+        });
       }
 
-      // Draw a random question
-      function drawQuestion() {
+      // Start Draw Animation
+      function startAnimation() {
         if (remaining.length === 0) {
-          currentQuestion = "All questions have been drawn. Please restart the game.";
-        } else {
-          const randomIndex = Math.floor(Math.random() * remaining.length);
-          currentQuestion = remaining[randomIndex];
-          // Remove selected question from the list
-          remaining.splice(randomIndex, 1);
+          questionDisplay.textContent = "All questions drawn. Please reset.";
+          return;
         }
-        updateDisplay();
+        drawButton.disabled = true;
+        questionDisplay.textContent = "Drawing...";
+
+        animateReels(() => {
+          const randomIndex = Math.floor(Math.random() * remaining.length);
+          const selectedQuestion = remaining[randomIndex];
+          questionDisplay.textContent = selectedQuestion;
+          remaining.splice(randomIndex, 1);
+          drawButton.disabled = false;
+        });
       }
 
-      // Reset the game
+      // Reset Game
       function resetGame() {
+        clearTimeout(animationTimeout);
         remaining = [...allQuestions];
-        currentQuestion = null;
-        updateDisplay();
+        questionDisplay.textContent = "Press 'Draw Question' to begin";
+        reels.forEach(reel => {
+          reel.textContent = "0";
+          reel.style.animation = "";
+        });
+        drawButton.disabled = false;
       }
 
-      // Attach event listeners to buttons
-      drawButton.addEventListener('click', drawQuestion);
-      resetButton.addEventListener('click', resetGame);
-
-      // Initialize display
-      updateDisplay();
+      // Event Listeners
+      drawButton.addEventListener("click", startAnimation);
+      resetButton.addEventListener("click", resetGame);
     });
   </script>
 
   <style>
-    /* Spin animation for the slot machine effect */
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    /* Slot Machine Styling */
+    #slotMachine {
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
     }
-    .animate-spin {
-      animation: spin 2s linear infinite;
+
+    /* Reel Styling */
+    .reel {
+      position: relative;
+      border: 2px solid cyan;
+      box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .reel-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.1s linear;
+    }
+
+    /* Scrolling Animation */
+    @keyframes scrollDigits {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100%); }
+    }
+
+    /* Button and Display Styling */
+    #questionDisplay {
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
     }
   </style>
 </MainLayout>
