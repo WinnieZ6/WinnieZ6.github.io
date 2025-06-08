@@ -36,7 +36,7 @@ This approach simplifies planning by converting complex, continuous problems int
 ### Principles
 
 #### Lattice Construction
-![Lattice Construction](/public/blog/images/image.png)
+![Lattice Construction](/blog/images/image.png)
 
 **Key Components:**
 - **Motion primitives**: These are **small, simple movements** that the robot can make, such as moving forward by a fixed amount or turning a fixed angle. These primitive movements are predefined, allowing the robot to use them **without recalculating** the entire path every time.
@@ -70,7 +70,7 @@ When encountering obstacles or sudden change in traffic, the robot needs to reac
 At each time step, you (virtually) simulate "what happens next" over a finite horizon, pick the best action sequence according to some cost function, then apply only the first action and repeat at the next step.
 
 You basically predict the sequence and predict the cost and chose the one with the lowest cost:
-![MPC Diagram](/public/blog/images/image-1.png)
+![MPC Diagram](/blog/images/image-1.png)
 
 ### MPPI Algorithm
 
@@ -118,12 +118,12 @@ $$
 ### Implementation
 
 **Control Update Visualization:**
-![MPPI Control Update](/public/blog/images/image-2.png)
+![MPPI Control Update](/blog/images/image-2.png)
 
 **Results:**
-![MPPI Visualization](/public/blog/images/image-5.png)
-![Path Tracking Demo](/public/blog/images/pathtracking_obav_demo.gif)
-![Pendulum Swing-up Demo](/public/blog/images/pendulum_swingup_demo.gif)
+![MPPI Visualization](/blog/images/image-5.png)
+![Path Tracking Demo](/blog/images/pathtracking_obav_demo.gif)
+![Pendulum Swing-up Demo](/blog/images/pendulum_swingup_demo.gif)
 
 #### Example Code
 ```python
@@ -183,7 +183,7 @@ A good state should:
 Monte Carlo Tree Search (MCTS) is a heuristic search algorithm that has gained significant attention in artificial intelligence, especially in decision-making and game playing. It effectively handles complex and strategic scenarios with large search spaces, where traditional algorithms might struggle.
 
 #### Overview
-![MCTS Overview](/public/blog/images/image-6.png)
+![MCTS Overview](/blog/images/image-6.png)
 
 | Phase | What happens | Why it matters |
 |-------|-------------|----------------|
@@ -192,7 +192,7 @@ Monte Carlo Tree Search (MCTS) is a heuristic search algorithm that has gained s
 | **Simulation** | From the newly added node, play out a playout policy (often uniform-random) until a terminal state. | Provides a cheap estimate of the value of that move without exhaustive search. |
 | **Backpropagation** | Propagate the simulation's result back up the path, updating visit counts and total reward for each node. | Makes future selections smarter by incorporating new knowledge. |
 
-![MCTS Visualized](/public/blog/images/MCTS.png)
+![MCTS Visualized](/blog/images/MCTS.png)
 
 #### Selection
 **Upper Confidence Bound (UCB) Formula:**
@@ -220,7 +220,7 @@ When a node has been visited, we:
    - `Draw = 0`
 
 #### Backpropagation
-![Backpropagation Illustration](/public/blog/images/image-1.png)
+![Backpropagation Illustration](/blog/images/image-1.png)
 
 In this phase, we [backpropagate](https://builtin.com/machine-learning/backpropagation-neural-network) and update results through the tree:
 1. Start from the simulated leaf node
@@ -262,7 +262,7 @@ AlphaZero combines three key components:
    - Provides best current answer
    - Combines with neural networks
 
-![AlphaZero Architecture](/public/blog/images/image-4.png)
+![AlphaZero Architecture](/blog/images/image-4.png)
 
 ### Neural Networks in AlphaZero
 
