@@ -1,0 +1,45 @@
+---
+import Navigation from '../../components/Navigation.astro';
+
+// Get all blog posts
+const posts = await Astro.glob('./*.md');
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Blog - Winnie</title>
+  </head>
+  <body class="bg-white">
+    <Navigation />
+    <main class="max-w-4xl mx-auto px-4 py-24">
+      <h1 class="text-4xl font-bold mb-12">Blog Posts</h1>
+      <div class="space-y-8">
+        {posts.map((post) => (
+          <article class="border-b pb-8">
+            <h2 class="text-2xl font-semibold mb-2">
+              {post.url ? (
+                <a href={post.url} class="hover:text-blue-600 transition-colors">
+                  {post.frontmatter.title || post.file.split('/').pop().replace('.md', '')}
+                </a>
+              ) : (
+                <span>{post.frontmatter.title || post.file.split('/').pop().replace('.md', '')}</span>
+              )}
+            </h2>
+            {post.frontmatter.date && (
+              <p class="text-gray-600 mb-4">
+                {new Date(post.frontmatter.date).toLocaleDateString()}
+              </p>
+            )}
+            {post.frontmatter.description && (
+              <p class="text-gray-700">{post.frontmatter.description}</p>
+            )}
+          </article>
+        ))}
+      </div>
+    </main>
+  </body>
+</html> 

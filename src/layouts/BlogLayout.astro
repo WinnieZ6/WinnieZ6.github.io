@@ -1,0 +1,256 @@
+---
+import Navigation from '../components/Navigation.astro';
+
+const { frontmatter } = Astro.props;
+
+// Calculate reading time
+function getReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  const readingTime = Math.ceil(words / wordsPerMinute);
+  return readingTime;
+}
+
+// Get content from slot
+const content = await Astro.slots.render('default');
+const readingTime = getReadingTime(content);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <title>{frontmatter.title} - Winnie's Blog</title>
+  </head>
+  <body class="bg-gray-50">
+    <Navigation />
+    <main class="max-w-4xl mx-auto px-4 py-24">
+      <article class="prose prose-lg max-w-none bg-white rounded-lg shadow-sm px-8 py-12">
+        <header class="mb-12 border-b pb-8">
+          <h1 class="text-4xl font-bold mb-4 text-gray-900">{frontmatter.title}</h1>
+          <div class="flex items-center gap-4 text-gray-600 mb-4">
+            {frontmatter.date && (
+              <p>
+                Published on {new Date(frontmatter.date).toLocaleDateString()}
+              </p>
+            )}
+            <span class="text-gray-300">•</span>
+            <p class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>
+              {readingTime} min read
+            </p>
+          </div>
+          {frontmatter.description && (
+            <p class="text-gray-700 mt-4 text-lg">
+              {frontmatter.description}
+            </p>
+          )}
+        </header>
+        <div class="markdown-content">
+          <slot />
+        </div>
+      </article>
+    </main>
+
+    <!-- Return to top button -->
+    <button
+      id="return-to-top"
+      class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      aria-label="Return to top"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+  </body>
+</html>
+
+<script>
+  // Return to top functionality
+  const returnToTopButton = document.getElementById('return-to-top');
+  
+  if (returnToTopButton) {
+    // Show button when scrolling down
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        returnToTopButton.classList.remove('opacity-0', 'invisible');
+        returnToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        returnToTopButton.classList.add('opacity-0', 'invisible');
+        returnToTopButton.classList.remove('opacity-100', 'visible');
+      }
+    });
+
+    // Smooth scroll to top when clicked
+    returnToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+</script>
+
+<style is:global>
+  .prose {
+    @apply max-w-none text-gray-800;
+  }
+
+  .prose h1 {
+    @apply text-4xl font-bold mt-12 mb-6 text-gray-900 border-b pb-4;
+  }
+
+  .prose h2 {
+    @apply text-3xl font-semibold mt-10 mb-6 text-gray-900;
+  }
+
+  .prose h3 {
+    @apply text-2xl font-semibold mt-8 mb-4 text-gray-800;
+  }
+
+  .prose h4 {
+    @apply text-xl font-semibold mt-6 mb-3 text-gray-800;
+  }
+
+  .prose p {
+    @apply my-4 leading-relaxed;
+  }
+
+  .prose ul {
+    @apply list-disc list-inside my-4 space-y-2;
+  }
+
+  .prose ol {
+    @apply list-decimal list-inside my-4 space-y-2;
+  }
+
+  .prose img {
+    @apply mx-auto rounded-lg shadow-md my-8 border border-gray-200;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .prose pre {
+    @apply bg-gray-50 p-6 rounded-lg overflow-x-auto my-6 border border-gray-200 text-sm;
+  }
+
+  .prose code {
+    @apply text-sm bg-gray-50 px-1.5 py-0.5 rounded text-gray-800 font-mono;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0 text-gray-800;
+  }
+
+  .prose table {
+    @apply w-full border-collapse my-8 bg-white;
+    font-size: 0.95em;
+  }
+
+  .prose th {
+    @apply bg-gray-50 px-4 py-3 text-left font-semibold border border-gray-200 text-gray-700;
+  }
+
+  .prose td {
+    @apply px-4 py-3 border border-gray-200;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-blue-500 pl-6 my-6 italic bg-blue-50 py-4 pr-4 rounded-r-lg text-gray-700;
+  }
+
+  .prose a {
+    @apply text-blue-600 hover:text-blue-800 underline decoration-blue-300 hover:decoration-blue-500 transition-colors;
+  }
+
+  .prose strong {
+    @apply font-bold text-gray-900;
+  }
+
+  .prose em {
+    @apply italic text-gray-800;
+  }
+
+  /* Math equations styling */
+  .katex-display {
+    @apply my-6 py-2 overflow-x-auto bg-white rounded-lg shadow-sm;
+  }
+
+  /* Custom styling for specific elements */
+  .prose > :first-child {
+    @apply mt-0;
+  }
+
+  .prose > :last-child {
+    @apply mb-0;
+  }
+
+  /* Improved list styling */
+  .prose ul ul,
+  .prose ol ol {
+    @apply ml-6 mt-2;
+  }
+
+  /* Code block title or language */
+  .prose pre:before {
+    content: attr(data-language);
+    @apply text-xs text-gray-500 block mb-2;
+  }
+
+  /* Image captions */
+  .prose img + em {
+    @apply block text-center text-sm text-gray-600 -mt-6 mb-8;
+  }
+
+  /* Definition lists */
+  .prose dl {
+    @apply my-6;
+  }
+
+  .prose dt {
+    @apply font-semibold text-gray-900 mt-4;
+  }
+
+  .prose dd {
+    @apply ml-4 mt-2;
+  }
+
+  /* Horizontal rule */
+  .prose hr {
+    @apply my-12 border-t-2 border-gray-200;
+  }
+
+  /* Footnotes */
+  .prose .footnotes {
+    @apply text-sm text-gray-600 mt-12 pt-8 border-t border-gray-200;
+  }
+
+  /* Table of contents */
+  .prose #table-of-contents + ul {
+    @apply bg-gray-50 p-6 rounded-lg border border-gray-200 my-8;
+  }
+
+  /* Keyboard shortcuts */
+  .prose kbd {
+    @apply px-2 py-1 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-300 rounded shadow-sm;
+  }
+
+  /* Highlight text */
+  .prose mark {
+    @apply bg-yellow-100 px-1 rounded;
+  }
+
+  /* Return to top button hover animation */
+  #return-to-top svg {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  #return-to-top:hover svg {
+    transform: translateY(-2px);
+  }
+</style> 
