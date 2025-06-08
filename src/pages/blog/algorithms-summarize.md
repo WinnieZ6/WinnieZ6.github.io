@@ -192,6 +192,8 @@ Monte Carlo Tree Search (MCTS) is a heuristic search algorithm that has gained s
 | **Simulation** | From the newly added node, play out a playout policy (often uniform-random) until a terminal state. | Provides a cheap estimate of the value of that move without exhaustive search. |
 | **Backpropagation** | Propagate the simulation's result back up the path, updating visit counts and total reward for each node. | Makes future selections smarter by incorporating new knowledge. |
 
+![MCTS Visualized](/public/blog/images/MCTS.png)
+
 #### Selection
 **Upper Confidence Bound (UCB) Formula:**
 $$\mathrm{UCB}(i)=\underbrace{\frac{w_i}{n_i}}_{\text {exploitation }}+\underbrace{c \sqrt{\frac{\ln n_p}{n_i}}}_{\text{exploration}}$$
