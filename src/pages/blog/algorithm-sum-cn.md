@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogLayout.astro
 title: "算法归纳 - 运动规划以及人工智能"
 date: 2025-06-9
-description: "Lattice Planning, MPPI, and Monte Carlo Tree Search algorithms的概览"
+description: "Lattice Planning, MPPI, and AlphaGo (Monte Carlo Tree Search)的概览"
 ---
 
 # Lattice Planning
@@ -155,8 +155,8 @@ $$\mathrm{UCB}(i)=\underbrace{\frac{w_i}{n_i}}_{\text{利用项}} + \underbrace{
 3. **非对称生长**  
    - 集中资源探索潜力区域（如象棋中的"将军"路径），避免均匀搜索的低效
 
-## AlphaZero 技术架构
-AlphaZero 融合三大核心组件：
+## AlphaGo 技术架构
+AlphaGo 融合三大核心组件：
 1. **价值网络**：预测当前局面胜率（输出0~1概率值）
 2. **策略网络**：预测各动作的概率分布（优先排除烂棋）
 3. **MCTS**：实时推演验证决策（可随时中断）
@@ -177,7 +177,7 @@ AlphaZero 融合三大核心组件：
 > - $R$：对局结果（胜+1，负-1）
 > - $p_θ(a|s)$：网络预测的动作概率
 
-所以，整体而言，Alphazero的流程如下，通过MCTS生成可能路径（下一步动作），通过policy network策略网络选择出较优的路径进行重点探索。接下来，通过value network价值网络判断哪些路径胜率较高，通过UCB函数选择下一步探索的路径，不断更新概率，如此往复。
+所以，整体而言，AlphaGo的流程如下，通过MCTS生成可能路径（下一步动作），通过policy network策略网络选择出较优的路径进行重点探索。接下来，通过value network价值网络判断哪些路径胜率较高，通过UCB函数选择下一步探索的路径，不断更新概率，如此往复。
 ## 核心问题解答
 ### 已有价值网络为何还需策略网络？
 - **速度优势**：策略网络通过 softmax 快速生成概率分布（比价值网络推演快10倍）
