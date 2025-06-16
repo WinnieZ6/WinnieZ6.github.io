@@ -1,9 +1,3 @@
----
-layout: ../../layouts/BlogLayout.astro
-title: "Interior Point Method (IPM)"
-date: 2025-06-11
-description: "A comprehensive overview of IPM in constrained optimization"
----
 # Interior Point Method (IPM)
 The **interior point method** (IPM) is a powerful optimization algorithm used primarily to solve convex optimization problems. 
 
